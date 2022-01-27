@@ -1,0 +1,25 @@
+.table-container {
+    display: flex;
+}
+
+table {
+    width: 200px;
+}
+
+th {
+    border: 1px solid tomato;
+}
+
+td {
+    border: 1px solid goldenrod;
+    text-align: center;
+}
+
+input {
+    /* border: none; */
+    width: 90%;
+}
+
+.table-body-number-symbol {
+    width: 20px;
+}
