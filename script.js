@@ -15,18 +15,15 @@ const creation = {
             <th colspan="3">${tableColumnNumber}</th>
           </tr>
         </thead>
-        <thead>
-          <tr>
-            <th colspan="3">${tableColumnNumber}П</th>
-          </tr>
-        </thead>
+        
         <tbody class="tbody-${tableColumnNumber}">
           <tr>
             <td class="table-body-number-symbol">№</td>
-            <td colspan="2">Text</td>
+            <td colspan="2">${tableColumnNumber}П</td>
           </tr>
         </tbody>
-      </table>`
+      </table>
+      `
     table.insertAdjacentHTML('beforeend', rawHTML);
   },
   createRow: function (bodyNum, rowNumber) {
@@ -36,8 +33,19 @@ const creation = {
       <td>${rowNumber}</td>
       <td><input type="text" /></td>
       <td><input type="text" /></td>
-    </tr>`
+    </tr>    
+    `
     table.insertAdjacentHTML('beforeend', rawHTML);
+  },
+  createTables: function (rowNames, isRow) {
+    for (let nameNumber = data.columnNameMaxCount; nameNumber >= data.columnNameInitCount; nameNumber--) {
+      if (!isRow) {
+        creation.createTable(nameNumber)
+      }
+      rowNames.forEach(element => {
+        creation.createRow(nameNumber, element)
+      });
+    }
   }
 }
 
@@ -50,20 +58,39 @@ const utility = {
   }
 }
 
-function executeCreation() {
-  for (let nameNumber = 1; nameNumber <= data.columnNameMaxCount; nameNumber++) {
-    creation.createTable(nameNumber)
-    data.rowNames.forEach(element => {
-      creation.createRow(nameNumber, element)
-    });
+
+
+const listners = {
+  addRow: function () {
+    const button = document.getElementsByClassName('add-row-btn')[0].addEventListener('click', function () {
+      const rowNumbers = data.rowGroup()
+      if (data.rowCount === 9) {
+        return
+      }
+      creation.createTables(rowNumbers, true)
+      data.rowCount += 1
+
+
+
+    })
   }
-
-
 }
+
+listners.addRow()
 
 
 
 const data = {
-  rowNames: [1, 2, 3, 4, 12, 11, 13, 22, 21, 23, 32, 31, 33, 42, 41, 43, 52, 51, 53, 62, 61, 63, 72, 71, 73, 82, 81, 83],
-  columnNameMaxCount: 8
+  rowGroup: function () {
+    const arr = [`${this.rowCount}${2}`, `${this.rowCount}${1}`, `${this.rowCount}${3}`]
+    return arr
+  },
+  rowNames: [1, 2, 3, 4, 12, 11, 13, 22, 21, 23, 32, 31, 33],
+  columnNameMaxCount: 8,
+  columnNameInitCount: 1,
+  rowInitCount: 3,
+  rowCount: 4
 }
+
+creation.createTables(data.rowNames, false)
+data.rowGroup()
