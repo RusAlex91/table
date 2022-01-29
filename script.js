@@ -94,3 +94,5 @@ const data = {
 
 creation.createTables(data.rowNames, false)
 data.rowGroup()
+
+console.log(document.getElementsByTagName('svg'))
