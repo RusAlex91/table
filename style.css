@@ -35,9 +35,12 @@ table:last-of-type tr th:last-child {
 }
 input {
   /* border: none; */
-  width: 90%;
+  width: 5rem;
+
   border: 0;
-  outline: none;
+  outline: 0;
+
+  transition: width 0.1s ease;
 }
 
 .table-body-number-symbol {
