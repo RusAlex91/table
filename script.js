@@ -110,9 +110,9 @@ const visualAdjustments = {
       input.addEventListener('input', function (event) {
         input.style.width = 5 + event.currentTarget.value.length / 3.6 + 'rem'
       })
-      input.addEventListener('focusout', function () {
-        input.style.width = 90 + '%'
-      })
+      // input.addEventListener('focusout', function () {
+      //   input.style.width = 90 + '%'
+      // })
     })
   }
 }
